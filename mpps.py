@@ -19,13 +19,13 @@ def main():
     destination_port = int(input("Entrez le port de destination : "))
     mpps = float(input("Entrez le nombre de mpps (millions de paquets par seconde) : "))
     
-    packet_size = 64  # Taille du paquet en octets (64 octets est une taille courante pour les tests)
-    packets_per_second = int(mpps * 1e6)  # Conversion de mpps en paquets par seconde
+    packet_size = 64
+    packets_per_second = int(mpps * 1e6)
     
     print(f"Envoi de {packets_per_second} paquets par seconde vers {destination_ip}:{destination_port}")
     
     threads = []
-    for _ in range(10):  # Utilisation de 10 threads pour mieux répartir la charge
+    for _ in range(10):
         thread = threading.Thread(target=send_packets, args=(destination_ip, destination_port, packet_size, packets_per_second // 10))
         threads.append(thread)
         thread.start()
